@@ -5,11 +5,32 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
 
-    public float moveSpeed = 5.0f; // Szybkoœæ poruszania postaci
+    public float moveSpeed = 5.0f;
     private Vector3 moveDirection;
     private bool isMoving;
+    private bool cutscene = false;
 
     private void Update()
+    {
+        touchtouch();
+        movementup();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!cutscene)
+        {
+            if (isMoving)
+            {
+                // Przesun postac
+                transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            }
+        }
+    }
+
+    // VOIDY
+    
+    private void movementup()
     {
         float horizontalInput = 0f;
         float verticalInput = 0f;
@@ -22,7 +43,6 @@ public class movement : MonoBehaviour
         {
             verticalInput = -1f;
         }
-
         if (Input.GetKey(KeyCode.A))
         {
             horizontalInput = -1f;
@@ -34,7 +54,7 @@ public class movement : MonoBehaviour
 
         moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
 
-        // SprawdŸ, czy gracz naciska przyciski ruchu
+        // Sprawdzanie klawiszy
         if (moveDirection.magnitude > 0)
         {
             isMoving = true;
@@ -44,13 +64,33 @@ public class movement : MonoBehaviour
             isMoving = false;
         }
     }
-
-    private void FixedUpdate()
+    private void touchtouch()
     {
-        if (isMoving)
+        // Sprawdzanie obiektu z tagiem
+        Collider2D touchableObject = CheckForTouchableObject();
+        if (touchableObject != null)
         {
-            // Przesuñ pozycjê postaci na podstawie wektora kierunku i szybkoœci
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            // Co sie dzieje gdy go dotknie
+            cutscene1();
         }
+    }
+    private Collider2D CheckForTouchableObject()
+    {
+        // Obiekty dotykaj¹ce
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1.0f);
+
+        // Czy dotykaj¹ce to tag
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Touchable"))
+            {
+                return collider;
+            }
+        }
+        return null;
+    }
+    private void cutscene1()
+    {
+        cutscene = true;
     }
 }
