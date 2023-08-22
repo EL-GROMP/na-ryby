@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 157935747494424963}
   - component: {fileID: 364454456854052970}
   - component: {fileID: 5759600008257905766}
+  - component: {fileID: 8916930377845789369}
   m_Layer: 0
   m_Name: rybcia lol
   m_TagString: Untagged
@@ -106,3 +107,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8916930377845789369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582780548004127653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e9f7200bd121f4e89af5cac6881d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10

@@ -72,6 +72,7 @@ public class movement : MonoBehaviour
         {
             // Co sie dzieje gdy go dotknie
             cutscene1();
+            touchableObject.GetComponent<rybispawner>().SpawnPrefab();
         }
     }
     private Collider2D CheckForTouchableObject()
