@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.Threading;
 
 public class znikamjakpieniadzeadiego : MonoBehaviour
 {
@@ -12,13 +13,17 @@ public class znikamjakpieniadzeadiego : MonoBehaviour
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
-        fadeStartTime = Time.time;
-
         StartCoroutine(FadeOut());
     }
 
     private IEnumerator FadeOut()
     {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(FadeOt());
+    }
+    private IEnumerator FadeOt()
+    {
+        fadeStartTime = Time.time;
         while (Time.time - fadeStartTime < fadeDuration)
         {
             float normalizedTime = (Time.time - fadeStartTime) / fadeDuration;
