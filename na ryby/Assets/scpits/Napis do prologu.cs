@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading;
+using System;
 
 public class Napisdoprologu : MonoBehaviour
 {
