@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class movement : MonoBehaviour
 {
@@ -128,5 +129,7 @@ public class movement : MonoBehaviour
         // Ustaw dok³adnie docelowe skale po zakoñczeniu interpolacji
         objectToScale.transform.localScale = objectTargetScale;
         mainCamera.orthographicSize = 1;
+        SceneManager.LoadScene("Gra");
     }
+
 }
