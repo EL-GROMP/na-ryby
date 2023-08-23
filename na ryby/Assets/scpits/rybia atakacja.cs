@@ -10,6 +10,7 @@ public class rybiaatakacja : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine(smierc());
     }
 
     private void Update()
@@ -19,5 +20,10 @@ public class rybiaatakacja : MonoBehaviour
             Vector3 moveDirection = (player.position - transform.position).normalized;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
+    }
+    private System.Collections.IEnumerator smierc()
+    {
+        yield return new WaitForSeconds(10.1f);
+        Destroy(gameObject);
     }
 }
