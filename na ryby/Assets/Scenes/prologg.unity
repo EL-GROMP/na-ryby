@@ -47812,7 +47812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &724193965
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47874,8 +47874,8 @@ Transform:
   m_GameObject: {fileID: 724193964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3222, y: 9.4973, z: -20.31}
-  m_LocalScale: {x: 463.91714, y: 220.36324, z: 1}
+  m_LocalPosition: {x: -2.5233, y: -16.0079, z: -20.31}
+  m_LocalScale: {x: 147.13632, y: 89.18919, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -95374,7 +95374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 491687314}
-  fullText: "Kacper oszala\u0142"
+  fullText: Pewnego przerybionego poranka
   typingSpeed: 0.05
   displayDuration: 5
 --- !u!114 &1428285989
