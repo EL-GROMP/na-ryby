@@ -11,12 +11,12 @@ public class kamien : MonoBehaviour
     private Vector3 originalScale;
     public float shakeDuration = 0.2f;
     public float shakeIntensity = 0.1f;
-    public float scaleMultiplier = 0.2f;
+    public float scaleMultiplier = 0.10f;
 
     private void Start()
     {
         Hits = Random.Range(5, 10);
-        currScale = scaleMultiplier * Hits;
+        currScale = scaleMultiplier * Hits + 1;
         originalPosition = transform.position;
         originalScale = transform.localScale;
         transform.localScale = originalScale * currScale;
@@ -50,7 +50,7 @@ public class kamien : MonoBehaviour
         }
 
         transform.position = originalPosition;
-        currScale = scaleMultiplier * Hits;
+        currScale = scaleMultiplier * Hits + 1;
         transform.localScale = originalScale * currScale;
         
     }

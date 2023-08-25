@@ -18,9 +18,6 @@ public class Kilof : MonoBehaviour
     public float rotationAngle = 45.0f;
     private bool isAnimating = false;
 
-    private bool hasBeenTouched = false;
-    private bool CheckCollision = false;
-
     public ruszanie script0;
     public kamienlicznik licznikkamieni;
 
@@ -62,7 +59,6 @@ public class Kilof : MonoBehaviour
         script0.isAnimationON();
 
         lastMinedTime = Time.time;
-        AudioSource.PlayClipAtPoint(miningSound, transform.position);
 
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 0, startAngle + rotationAngle);
@@ -92,7 +88,20 @@ public class Kilof : MonoBehaviour
             transform.rotation = secondTargetRotation;
         }
 
-        Mined();
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, GetComponent<BoxCollider2D>().size, 0);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("kamien1"))
+            {
+                kamien stone = collider.GetComponent<kamien>();
+                if (stone != null)
+                {
+                    AudioSource.PlayClipAtPoint(miningSound, transform.position);
+                    licznikkamieni.AddStone(1);
+                    stone.StartShake();
+                }
+            }
+        }
 
         yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
 
@@ -115,26 +124,5 @@ public class Kilof : MonoBehaviour
         transform.rotation = startRotation;
         script0.isAnimationOFF();
         isAnimating = false;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("kamien1"))
-        {
-            hasBeenTouched = true; // Ustaw flagê na true, gdy obiekty siê dotkn¹
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("kamien1"))
-        {
-            hasBeenTouched = false; // Resetuj flagê na false, gdy obiekt opuœci obszar
-        }
-    }
-    private void Mined()
-    {
-        if (hasBeenTouched)
-        {
-
-        }
     }
 }
