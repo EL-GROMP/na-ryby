@@ -17,6 +17,7 @@ public class Kilof : MonoBehaviour
     public float rotationDuration = 0.5f;
     public float rotationAngle = 45.0f;
     private bool isAnimating = false;
+    private bool CheckCollision = false;
 
     public ruszanie script0;
     public kamienlicznik licznikkamieni;
@@ -53,7 +54,7 @@ public class Kilof : MonoBehaviour
         }
     }
 
-   private IEnumerator AnimateRotation(float startAngle)
+    private IEnumerator AnimateRotation(float startAngle)
     {
         isAnimating = true;
         script0.isAnimationON();
@@ -89,23 +90,9 @@ public class Kilof : MonoBehaviour
             transform.rotation = secondTargetRotation;
         }
 
-        //  W Y K R Y W A N I E
+        
 
-        if (collision.gameObject.CompareTag("kamien1"))
-        {
-            Kamien1Script kamien1Script = collision.gameObject.GetComponent<kamien>();
-            if (kamien1Script != null)
-            {
-                kamien1Script.ActivateMethod(StartCoroutine(ShakeAndScaleCoroutine());
-                licznikkamieni.AddStone(1);
-            }
-        }
-
-
-
-
-
-            yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
+        yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
 
         elapsedTime = 0.0f;
 
@@ -126,5 +113,24 @@ public class Kilof : MonoBehaviour
         transform.rotation = startRotation;
         script0.isAnimationOFF();
         isAnimating = false;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (CheckCollision == true)
+        {
+            if (other.CompareTag("kamien1"))
+            {
+                kamien targetScript = other.GetComponent<kamien>();
+                if (targetScript != null)
+                {
+                    targetScript.StartShakeAndScale();
+                    CheckCollision = false;
+                }
+                else
+                {
+                    CheckCollision = false;
+                }
+            }
+        }
     }
 }

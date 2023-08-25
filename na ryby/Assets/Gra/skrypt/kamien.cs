@@ -27,7 +27,7 @@ public class kamien : MonoBehaviour
         StartCoroutine(ShakeAndScaleCoroutine());
     }
 
-    private System.Collections.IEnumerator ShakeAndScaleCoroutine()
+    public System.Collections.IEnumerator ShakeAndScaleCoroutine()
     {
         float elapsedTime = 0f;
 

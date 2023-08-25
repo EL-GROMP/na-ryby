@@ -6,6 +6,10 @@ TagManager:
   tags:
   - toucher
   - Touchable
+  - kamien1
+  - kamien2
+  - kamien3
+  - kamien4
   layers:
   - Default
   - TransparentFX
