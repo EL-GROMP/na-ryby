@@ -29,6 +29,7 @@ public class ruszanie : MonoBehaviour
     public KIFOLskrypt script1;
     public MOLTEKskrypt script2;
     public REVOLVERskrypt script3;
+    private bool isAnimation = false;
 
     private void Start()
     {
@@ -40,25 +41,36 @@ public class ruszanie : MonoBehaviour
     {
         staminaBar.fillAmount = stamina / maxStamina;
         movementup();
+        if (!isAnimation)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                script1.klikniete1();
+                script2.odklikniete2();
+                script3.odklikniete3();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                script2.klikniete2();
+                script1.odklikniete1();
+                script3.odklikniete3();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                script3.klikniete3();
+                script1.odklikniete1();
+                script2.odklikniete2();
+            }
+        }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            script1.klikniete1();
-            script2.odklikniete2();
-            script3.odklikniete3();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            script2.klikniete2();
-            script1.odklikniete1();
-            script3.odklikniete3();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            script3.klikniete3();
-            script1.odklikniete1();
-            script2.odklikniete2();
-        }
+    public void isAnimationON()
+    {
+        isAnimation = true;
+    }
+    public void isAnimationOFF()
+    {
+        isAnimation = false;
     }
 
     private void movementup()

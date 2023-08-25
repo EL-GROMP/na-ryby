@@ -18,6 +18,9 @@ public class Kilof : MonoBehaviour
     public float rotationAngle = 45.0f;
     private bool isAnimating = false;
 
+    public ruszanie script0;
+    public kamienlicznik licznikkamieni;
+
     void Update()
     {
         if (!isAnimating)
@@ -53,6 +56,7 @@ public class Kilof : MonoBehaviour
    private IEnumerator AnimateRotation(float startAngle)
     {
         isAnimating = true;
+        script0.isAnimationON();
 
         lastMinedTime = Time.time;
         AudioSource.PlayClipAtPoint(miningSound, transform.position);
@@ -85,7 +89,23 @@ public class Kilof : MonoBehaviour
             transform.rotation = secondTargetRotation;
         }
 
-        yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
+        //  W Y K R Y W A N I E
+
+        if (collision.gameObject.CompareTag("kamien1"))
+        {
+            Kamien1Script kamien1Script = collision.gameObject.GetComponent<kamien>();
+            if (kamien1Script != null)
+            {
+                kamien1Script.ActivateMethod(StartCoroutine(ShakeAndScaleCoroutine());
+                licznikkamieni.AddStone(1);
+            }
+        }
+
+
+
+
+
+            yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
 
         elapsedTime = 0.0f;
 
@@ -104,6 +124,7 @@ public class Kilof : MonoBehaviour
         }
 
         transform.rotation = startRotation;
+        script0.isAnimationOFF();
         isAnimating = false;
     }
 }
