@@ -17,6 +17,8 @@ public class Kilof : MonoBehaviour
     public float rotationDuration = 0.5f;
     public float rotationAngle = 45.0f;
     private bool isAnimating = false;
+
+    private bool hasBeenTouched = false;
     private bool CheckCollision = false;
 
     public ruszanie script0;
@@ -90,7 +92,7 @@ public class Kilof : MonoBehaviour
             transform.rotation = secondTargetRotation;
         }
 
-        
+        Mined();
 
         yield return new WaitForSeconds(0.3f); // Odstêp miêdzy obrótami
 
@@ -114,23 +116,25 @@ public class Kilof : MonoBehaviour
         script0.isAnimationOFF();
         isAnimating = false;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CheckCollision == true)
+        if (collision.CompareTag("kamien1"))
         {
-            if (other.CompareTag("kamien1"))
-            {
-                kamien targetScript = other.GetComponent<kamien>();
-                if (targetScript != null)
-                {
-                    targetScript.StartShakeAndScale();
-                    CheckCollision = false;
-                }
-                else
-                {
-                    CheckCollision = false;
-                }
-            }
+            hasBeenTouched = true; // Ustaw flagê na true, gdy obiekty siê dotkn¹
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("kamien1"))
+        {
+            hasBeenTouched = false; // Resetuj flagê na false, gdy obiekt opuœci obszar
+        }
+    }
+    private void Mined()
+    {
+        if (hasBeenTouched)
+        {
+
         }
     }
 }

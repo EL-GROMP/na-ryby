@@ -22,7 +22,7 @@ public class kamien : MonoBehaviour
         transform.localScale = originalScale * currScale;
     }
 
-    public void StartShakeAndScale()
+    public void StartShake()
     {
         StartCoroutine(ShakeAndScaleCoroutine());
     }
