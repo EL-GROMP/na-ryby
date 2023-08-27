@@ -42,6 +42,15 @@ public class kamien : MonoBehaviour
 
         if(Hits == 1)
         {
+            GameObject level1Object = GameObject.FindGameObjectWithTag("level1");
+            if (level1Object != null)
+            {
+                SpawnKamieni scriptComponent = level1Object.GetComponent<SpawnKamieni>();
+                if (scriptComponent != null)
+                {
+                    scriptComponent.OnPrefabDisappear();
+                }
+            }
             Destroy(gameObject);
         }
         else

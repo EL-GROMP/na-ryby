@@ -10,6 +10,7 @@ TagManager:
   - kamien2
   - kamien3
   - kamien4
+  - level1
   layers:
   - Default
   - TransparentFX
