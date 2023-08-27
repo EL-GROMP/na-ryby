@@ -9,6 +9,11 @@ public class KIFOLskrypt : MonoBehaviour
     public Color color2 = new Color(1f, 1f, 1f);
     public GameObject kilof;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void klikniete1()
     {
         GetComponent<Image>().color = color2;

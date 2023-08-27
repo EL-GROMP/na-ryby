@@ -10,6 +10,11 @@ public class MOLTEKskrypt : MonoBehaviour
     public GameObject mlotek;
     public budowanie script1;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void klikniete2()
     {
         script1.ShowRange();

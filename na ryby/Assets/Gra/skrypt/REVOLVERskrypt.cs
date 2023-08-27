@@ -9,6 +9,11 @@ public class REVOLVERskrypt : MonoBehaviour
     public Color color2 = new Color(1f, 1f, 1f);
     public GameObject rewolwero;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void klikniete3()
     {
         GetComponent<Image>().color = color2;

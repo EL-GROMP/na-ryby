@@ -26,6 +26,8 @@ public class ruszanie : MonoBehaviour
     private bool isFading;
 
     // H U D
+    public bool aretoolsunlocked = false;
+    public bool isgununlocked = false;
     public KIFOLskrypt script1;
     public MOLTEKskrypt script2;
     public REVOLVERskrypt script3;
@@ -43,23 +45,28 @@ public class ruszanie : MonoBehaviour
         movementup();
         if (!isAnimation)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (aretoolsunlocked)
             {
-                script1.klikniete1();
-                script2.odklikniete2();
-                script3.odklikniete3();
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    script1.klikniete1();
+                    script2.odklikniete2();
+                    script3.odklikniete3();
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    script2.klikniete2();
+                    script1.odklikniete1();
+                    script3.odklikniete3();
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                script2.klikniete2();
-                script1.odklikniete1();
-                script3.odklikniete3();
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                script3.klikniete3();
-                script1.odklikniete1();
-                script2.odklikniete2();
+            if (isgununlocked) {
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    script3.klikniete3();
+                    script1.odklikniete1();
+                    script2.odklikniete2();
+                }
             }
         }
     }
