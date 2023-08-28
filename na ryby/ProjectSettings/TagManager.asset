@@ -7,11 +7,12 @@ TagManager:
   - toucher
   - Touchable
   - kamien1
-  - kamien2
-  - kamien3
-  - kamien4
   - level1
   - Enemy
+  - laser
+  - railgun
+  - melter
+  - uranmelter
   layers:
   - Default
   - TransparentFX
