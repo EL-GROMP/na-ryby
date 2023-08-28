@@ -6,7 +6,6 @@ public class enemy1 : MonoBehaviour
 {
     public float maxHP = 100;
     public int ScorePoints = 50;
-    public float damageRate = 0.01f; // Przyk³adowa iloœæ obra¿eñ na sekundê
 
     public float DamageByLaser = 1f;
     public float DamageByMelter = 0.1f;
@@ -14,52 +13,48 @@ public class enemy1 : MonoBehaviour
     public float DamageByRailgun = 15f;
 
     public float currentHP;
-    private bool isTakingDamageL = false;
-    private bool isTakingDamageM = false;
-    private bool isTakingDamageUM = false;
-    private bool isTakingDamageR = false;
+    private Dictionary<string, System.Func<IEnumerator>> damageMethods = new Dictionary<string, System.Func<IEnumerator>>();
+
+    private Transform playerTransform;
+    public float followSpeed = 5.0f; // Prêdkoœæ pod¹¿ania
 
     private void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
         currentHP = maxHP;
+        damageMethods["laser"] = TakeDamageByLaser;
+        damageMethods["melter"] = TakeDamageByMelter;
+        damageMethods["uranmelter"] = TakeDamageByUraniumMelter;
+        damageMethods["railgun"] = TakeDamageByRailgun;
+    }
+    private void Update()
+    {
+        if (playerTransform != null)
+        {
+            // Oblicz kierunek do gracza
+            Vector3 direction = playerTransform.position - transform.position;
+            direction.Normalize();
+
+            // Przesuñ obiekt w kierunku gracza z okreœlon¹ prêdkoœci¹
+            transform.position += direction * followSpeed * Time.deltaTime;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         // SprawdŸ, czy kolizja jest z odpowiednim tagiem
-        if (collision.CompareTag("laser"))
+        if (damageMethods.ContainsKey(collision.tag))
         {
-            if (!isTakingDamageL)
-            {
-                StartCoroutine(TakeDamageByLaser());
-            }
-        }
-        if (collision.CompareTag("melter"))
-        {
-            if (!isTakingDamageM)
-            {
-               // StartCoroutine(TakeDamageByMelter());
-            }
-        }
-        if (collision.CompareTag("uranmelter"))
-        {
-            if (!isTakingDamageUM)
-            {
-               // StartCoroutine(TakeDamageByUraniumMelter());
-            }
-        }
-        if (collision.CompareTag("railgun"))
-        {
-            if (!isTakingDamageR)
-            {
-               // StartCoroutine(TakeDamageByRailgun());
-            }
+            StartCoroutine(damageMethods[collision.tag]());
         }
     }
 
     IEnumerator TakeDamageByLaser()
     {
-        isTakingDamageL = true;
         if (currentHP > 0)
         {
             currentHP -= DamageByLaser; // Przyk³adowa iloœæ obra¿eñ
@@ -68,12 +63,10 @@ public class enemy1 : MonoBehaviour
         {
             Die();
         }
-        yield return new WaitForSeconds(damageRate);
-        isTakingDamageL = false;
+        yield return null;
     }
     IEnumerator TakeDamageByMelter()
     {
-        isTakingDamageM = true;
         if (currentHP > 0)
         {
             currentHP -= DamageByMelter; // Przyk³adowa iloœæ obra¿eñ
@@ -81,12 +74,10 @@ public class enemy1 : MonoBehaviour
         {
             Die();
         }
-        yield return new WaitForSeconds(damageRate);
-        isTakingDamageM = false;
+        yield return null;
     }
     IEnumerator TakeDamageByUraniumMelter()
     {
-        isTakingDamageUM = true;
         if (currentHP > 0)
         {
             currentHP -= DamageByUraniumMelter; // Przyk³adowa iloœæ obra¿eñ
@@ -95,22 +86,18 @@ public class enemy1 : MonoBehaviour
         {
             Die();
         }
-        yield return new WaitForSeconds(damageRate);
-        isTakingDamageUM = false;
+        yield return null;
     }
     IEnumerator TakeDamageByRailgun()
     {
-        isTakingDamageR = true;
         if (currentHP > 0)
         {
             currentHP -= DamageByRailgun; // Przyk³adowa iloœæ obra¿eñ
-            yield return new WaitForSeconds(damageRate);
         } else
         {
             Die();
         }
-        yield return new WaitForSeconds(damageRate);
-        isTakingDamageR = false;
+        yield return null;
     }
 
     void Die()

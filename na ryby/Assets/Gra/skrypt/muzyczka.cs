@@ -5,7 +5,7 @@ using UnityEngine;
 public class muzyczka : MonoBehaviour
 {
     public AudioSource musicSource;
-    private bool isMusicPaused = false;
+    //private bool isMusicPaused = false;
 
     private void Start()
     {
@@ -15,18 +15,18 @@ public class muzyczka : MonoBehaviour
     public void PlayMusic()
     {
         musicSource.Play();
-        isMusicPaused = false;
+        //isMusicPaused = false;
     }
 
     public void PauseMusic()
     {
         musicSource.Pause();
-        isMusicPaused = true;
+        //isMusicPaused = true;
     }
 
     public void ResumeMusic()
     {
         musicSource.UnPause();
-        isMusicPaused = false;
+        //isMusicPaused = false;
     }
 }

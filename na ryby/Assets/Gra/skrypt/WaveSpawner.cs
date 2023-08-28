@@ -16,15 +16,15 @@ public class WaveSpawner : MonoBehaviour
     private int waveNumber = 0; // numer aktualnej fali
     private int waveBudget = 10; // maksymalny bud�et
     private int enemyCost1 = 1; // cena wroga typu 1
-    private int enemyCost2 = 2; // cena wroga typu 2
-    private int enemyCost3 = 3; // cena wroga typu 3
-    private int enemyCost4 = 2; // cena wroga typu 4
+    private int enemyCost2 = 1; // cena wroga typu 2
+    private int enemyCost3 = 2; // cena wroga typu 3
+    private int enemyCost4 = 3; // cena wroga typu 4
     private int enemyCost5 = 4; // cena wroga typu 5
     private int budget = 0; // bud�et fali
-    //public Text waveText; // referencja tekstu fali
-    //ShowAndHide script; // skrypt do tekstu fali
+    public ScoreAndWaveManager SWManager; // skrypt do tekstu fali
 
-    private void Start()
+
+    public void SpawnEnemies()
     {
         StartCoroutine(SpawnWave());
     }
@@ -88,6 +88,7 @@ public class WaveSpawner : MonoBehaviour
         {
             yield return null;
         }
+        SWManager.StartCounting();
     }
 
     private Vector2 GetRandomPointOutsideArea()
@@ -98,7 +99,7 @@ public class WaveSpawner : MonoBehaviour
         do
         {
             // Generuj losową odległość i kąt w radianach
-            float distance = Random.Range(400f, 1000f);
+            float distance = Random.Range(400f, 600f);
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
 
             // Oblicz pozycję wroga w oparciu o odległość i kąt

@@ -13,7 +13,6 @@ public class LASERTurret : MonoBehaviour
     public float bulletLifetime = 3.0f;
 
     public AudioClip shotsound;
-    private int audioplaying = 1;
 
     private float currentShootingCooldown = 0.0f;
 
